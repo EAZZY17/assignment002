@@ -1,0 +1,24 @@
+{
+  "name": "assignment02",
+  "version": "1.0.0",
+  "description": "",
+  "main": "portfolio-backend/server.js",
+  "scripts": {
+    "start": "node portfolio-backend/server.js",
+    "dev": "nodemon portfolio-backend/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "http-errors": "^2.0.0",
+    "mongoose": "^7.8.7",
+    "morgan": "^1.10.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
