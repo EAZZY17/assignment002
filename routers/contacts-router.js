@@ -1,12 +1,16 @@
 var express = require('express');
 var router = express.Router();
 var ctrl = require('../controllers/control-controller');
+var auth = require('../middleware/auth-middleware');
 
-router.get('/',    ctrl.list);
-router.post('/',   ctrl.create);
+// Public routes (no authentication required)
+router.get('/', ctrl.list);
 router.get('/:id', ctrl.getById);
-router.put('/:id', ctrl.update);
-router.delete('/:id', ctrl.remove);
-router.delete('/', ctrl.removeAll);
+
+// Protected routes (authentication required)
+router.post('/', auth.authenticate, ctrl.create);
+router.put('/:id', auth.authenticate, ctrl.update);
+router.delete('/:id', auth.authenticate, ctrl.remove);
+router.delete('/', auth.authenticate, ctrl.removeAll);
 
 module.exports = router;

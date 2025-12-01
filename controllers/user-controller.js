@@ -1,12 +1,28 @@
 let UserModel = require('../models/user-model');
 
-// CREATE
+// CREATE (Sign Up) - Password will be hashed by model pre-save hook
 module.exports.create = async function (req, res, next) {
   try {
+    // Don't return password in response
     const user = await UserModel.create(req.body);
-    res.status(201).json(user);
+    const userResponse = {
+      _id: user._id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      created: user.created,
+      updated: user.updated
+    };
+    res.status(201).json(userResponse);
   } catch (error) {
     console.error(error);
+    // Handle duplicate email error
+    if (error.code === 11000) {
+      return res.status(400).json({ 
+        success: false, 
+        message: 'Email already exists. Please use a different email.' 
+      });
+    }
     res.status(500).json({ success: false, message: error.message });
   }
 };

@@ -11,6 +11,7 @@ var contactRouter   = require('./routers/contacts-router');
 var projectsRouter  = require('./routers/projects-router');
 var servicesRouter  = require('./routers/service-router');
 var usersRouter     = require('./routers/users-router');
+var authRouter      = require('./routers/auth-router');
 
 var app = express();
 
@@ -23,6 +24,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // root message route (required by assignment screenshot)
 app.use('/', indexRouter);
+
+// authentication router (no auth required)
+app.use('/api/auth', authRouter);
 
 // resource routers
 app.use('/api/contacts',  contactRouter);
