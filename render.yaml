@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: assignment02
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: ATLASDB
+        sync: false  # Add your MongoDB Atlas connection string in Render dashboard
+      - key: JWT_SECRET
+        sync: false  # Add a secure random string for JWT signing in Render dashboard
